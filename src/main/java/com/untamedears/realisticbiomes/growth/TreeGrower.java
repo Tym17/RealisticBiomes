@@ -100,6 +100,7 @@ public class TreeGrower extends AgeableGrower {
 		if (type == null) {
 			return;
 		}
+		block.setType(Material.AIR);
 		block.getLocation().getWorld().generateTree(block.getLocation(), type);
 	}
 
