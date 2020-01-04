@@ -21,10 +21,16 @@ public class ColumnPlantGrower extends IArtificialGrower {
 		return bottomBlock;
 	}
 
-	private int maxHeight;
+	protected int maxHeight;
+	protected Material environment;
 
 	public ColumnPlantGrower(int maxHeight) {
+		this(maxHeight, Material.AIR);
+	}
+
+	public ColumnPlantGrower(int maxHeight, Material environment) {
 		this.maxHeight = maxHeight;
+		this.environment = environment;
 	}
 
 	@Override
@@ -39,7 +45,7 @@ public class ColumnPlantGrower extends IArtificialGrower {
 
 	@Override
 	public int getStage(Block block) {
-		if (getActualHeight(block) < maxHeight) {
+		if (getExtremitiesDistance(block) < maxHeight) {
 			//can grow more
 			return 0;
 		}
@@ -47,7 +53,7 @@ public class ColumnPlantGrower extends IArtificialGrower {
 		return 1;
 	}
 
-	protected int getActualHeight(Block block) {
+	protected int getExtremitiesDistance(Block block) {
 		Block bottom = getRelativeBlock(block, BlockFace.DOWN);
 		Block top = getRelativeBlock(block, BlockFace.UP);
 
@@ -82,7 +88,7 @@ public class ColumnPlantGrower extends IArtificialGrower {
 			counter++;
 			onTop = onTop.getRelative(BlockFace.UP);
 			Material topMaterial = onTop.getType();
-			if (topMaterial == Material.AIR) {
+			if (topMaterial == environment) {
 				onTop.setType(finalType);
 				howMany--;
 				continue;
