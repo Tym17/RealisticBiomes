@@ -35,6 +35,9 @@ public abstract class IArtificialGrower {
 		case CACTUS:
 		case SUGAR_CANE:
 			return new ColumnPlantGrower(3);
+		case KELP:
+		case KELP_PLANT:
+			return new KelpGrower();
 		case BAMBOO:
 			return new BambooGrower();
 		default:

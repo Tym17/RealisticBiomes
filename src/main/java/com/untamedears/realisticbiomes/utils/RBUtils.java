@@ -106,6 +106,9 @@ public class RBUtils {
 		case CHORUS_FLOWER:
 		case CHORUS_PLANT:
 			return Material.CHORUS_FLOWER;
+		case KELP:
+		case KELP_PLANT:
+			return Material.KELP;
 		default:
 			return null;
 		}
@@ -142,7 +145,8 @@ public class RBUtils {
 	}
 
 	public static boolean isColumnPlant(Material mat) {
-		return mat == Material.CACTUS || mat == Material.SUGAR_CANE  || mat == Material.BAMBOO;
+		return mat == Material.CACTUS || mat == Material.SUGAR_CANE
+				|| mat == Material.BAMBOO || mat == Material.KELP;
 	}
 
 	public static boolean isCrop(Material material) {
