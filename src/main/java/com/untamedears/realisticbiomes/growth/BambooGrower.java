@@ -4,16 +4,16 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Bamboo;
 
-public class BambooGrower extends ColumnPlantGrower {
+public class BambooGrower extends RangedColumnPlantGrower {
 	protected static final int LEAVES_AMOUNT = 3;
 	protected static final int LARGE_LEAVES_START_HEIGHT = 5;
 
 	public BambooGrower() {
-		this(12); // up to 16
+		this(12, 4);
 	}
 
-	protected BambooGrower(int maxHeight) {
-		super(maxHeight);
+	protected BambooGrower(int maxHeight, int maxExtension) {
+		super(maxHeight, maxExtension);
 	}
 
 	@Override

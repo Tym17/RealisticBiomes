@@ -45,11 +45,11 @@ public class ColumnPlantGrower extends IArtificialGrower {
 
 	@Override
 	public int getStage(Block block) {
-		if (getExtremitiesDistance(block) < maxHeight) {
-			//can grow more
+		if (getExtremitiesDistance(block) < getSupposedHeight(block)) {
+			// can grow more
 			return 0;
 		}
-		//fully grown
+		// fully grown
 		return 1;
 	}
 
@@ -70,6 +70,14 @@ public class ColumnPlantGrower extends IArtificialGrower {
 	}
 
 	/**
+	 * @param block plant
+	 * @return maxHeight for plant at Block's position
+	 */
+	protected int getSupposedHeight(Block block) {
+		return maxHeight;
+	}
+
+	/**
 	 * Handles the growth of a column plant ( i.e sugarcane, cactus )
 	 * @param block Block of the corresponding plant
 	 * @param howMany How tall should the growth be
@@ -83,8 +91,9 @@ public class ColumnPlantGrower extends IArtificialGrower {
 		}
 
 		int counter = 1;
+		int supposedHeight = getSupposedHeight(block);
 		Block onTop = block;
-		while (counter < maxHeight && howMany > 0) {
+		while (counter < supposedHeight && howMany > 0) {
 			counter++;
 			onTop = onTop.getRelative(BlockFace.UP);
 			Material topMaterial = onTop.getType();
@@ -97,6 +106,12 @@ public class ColumnPlantGrower extends IArtificialGrower {
 				// already existing block of the same plant
 				continue;
 			}
+			if (RBUtils.getRemappedMaterial(topMaterial) == RBUtils.getRemappedMaterial(block.getType())) {
+				// Some plants may have different blocks for their bodies.
+				// i.e Kelp is composed of KELP_PLANT but has a KELP top.
+				continue;
+			}
+
 			// neither air, nor the right plant, but something else blocking growth, so we
 			// stop
 			break;

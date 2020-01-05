@@ -263,7 +263,6 @@ public class PlantGrowthConfig extends AbstractGrowthConfig {
 	 * updated
 	 * 
 	 * @param plant Plant to update
-	 * @param block Block of the plant
 	 * @return UNIX time stamp at which the plant needs to be updated next if it is
 	 *         still growing or Long.MAX_VALUE if it will never grow or is already
 	 *         full grown
